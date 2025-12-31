@@ -65,20 +65,22 @@ export default function AppInstalled() {
     
     if (appId && mockApps[appId]) {
       setApp(mockApps[appId]);
+      
+      const interval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            setTimeout(() => setIsInstalling(false), 500);
+            return 100;
+          }
+          return prev + 10;
+        });
+      }, 200);
+
+      return () => clearInterval(interval);
+    } else {
+      window.location.href = '/playmarket';
     }
-
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => setIsInstalling(false), 500);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 200);
-
-    return () => clearInterval(interval);
   }, []);
 
   const handleOpenApp = () => {
