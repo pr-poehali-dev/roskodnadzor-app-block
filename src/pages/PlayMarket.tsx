@@ -156,7 +156,10 @@ export default function PlayMarket() {
                         <span className="text-sm">{selectedApp.downloads}</span>
                       </div>
                     </div>
-                    <Button className="w-full bg-green-600 hover:bg-green-700">
+                    <Button 
+                      className="w-full bg-green-600 hover:bg-green-700"
+                      onClick={() => window.location.href = `/app-installed?id=${selectedApp.id}`}
+                    >
                       <Icon name="Download" size={18} className="mr-2" />
                       Установить
                     </Button>
